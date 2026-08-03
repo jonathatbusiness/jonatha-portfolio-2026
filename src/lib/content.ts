@@ -179,7 +179,7 @@ const ptPath = (path: string) => `/pt-br${path === "/" ? "" : path}`;
 const englishExpertise: Expertise[] = [
   {
     id: "instructional-design",
-    title: "Design Instrucional",
+    title: "Instructional Design",
     short: "Learning experiences that organize complex content and support practical application.",
     description:
       "I design digital learning experiences that turn complex information into structured journeys. The work combines instructional strategy, content architecture, interaction design and visual production.",
@@ -264,7 +264,7 @@ const englishExpertise: Expertise[] = [
 const portugueseExpertise: Expertise[] = [
   {
     id: "instructional-design",
-    title: "Instructional Design",
+    title: "Design Instrucional",
     short: "Experiências de aprendizagem que organizam conteúdos complexos e facilitam a aplicação prática.",
     description:
       "Projeto experiências de aprendizagem digitais que transformam informações complexas em jornadas estruturadas. Combino estratégia instrucional, arquitetura de conteúdo, design de interação e produção visual.",
@@ -276,7 +276,7 @@ const portugueseExpertise: Expertise[] = [
       "Storyline 360",
       "Rise 360",
       "SCORM",
-      "Learning Experience Design",
+      "Design de experiências de aprendizagem",
     ],
     cta: "Explorar Design Instrucional",
     process: [
@@ -317,14 +317,14 @@ const portugueseExpertise: Expertise[] = [
   {
     id: "digital-products",
     title: "Produtos Digitais",
-    short: "Websites e aplicações que conectam estratégia, experiência e tecnologia.",
+    short: "Sites e aplicações que conectam estratégia, experiência e tecnologia.",
     description:
       "Projeto e construo experiências digitais que resolvem necessidades reais, combinando definição de produto, UX, interface, prototipação, desenvolvimento front-end, integrações e IA aplicada.",
     skills: [
       "Estratégia de produto",
       "UX",
-      "UI Design",
-      "Web Design",
+      "Design de UI",
+      "Web design",
       "Prototipação",
       "Next.js",
       "React",
@@ -519,7 +519,7 @@ export const content: Record<Locale, Content> = {
     meta: {
       title: "Jonatha Teixeira — Designer Multidisciplinar",
       description:
-        "Portfólio de Jonatha Teixeira, designer multidisciplinar com experiência em Instructional Design, Visual Design e criação de websites e produtos digitais com tecnologia e inteligência artificial.",
+        "Portfólio de Jonatha Teixeira, designer multidisciplinar com experiência em design instrucional, design visual e criação de sites e produtos digitais com tecnologia e inteligência artificial.",
     },
     nav: [
       { label: "Projetos", href: "/pt-br/work" },
@@ -535,7 +535,7 @@ export const content: Record<Locale, Content> = {
       viewExperience: "Saber mais sobre mim",
       allProjects: "Ver todos os projetos",
       all: "Todos",
-      caseStudy: "Case",
+      caseStudy: "Estudo de caso",
       relatedProjects: "Projetos relacionados",
       responseTime: "Costumo responder em até dois dias úteis.",
     },
@@ -549,7 +549,7 @@ export const content: Record<Locale, Content> = {
       featured: {
         eyebrow: "Projetos em destaque",
         title: "Trabalhos selecionados que mostram como penso, projeto e construo soluções.",
-        text: "Uma seleção de projetos em aprendizagem, design visual e produtos digitais. Cada case apresenta o contexto, as decisões tomadas, meu papel e o resultado alcançado.",
+        text: "Uma seleção de projetos em aprendizagem, design visual e produtos digitais. Cada estudo de caso apresenta o contexto, as decisões tomadas, meu papel e o resultado alcançado.",
         cta: "Ver todos os projetos",
       },
       expertise: {
@@ -577,10 +577,10 @@ export const content: Record<Locale, Content> = {
         title: "Ferramentas são parte do processo, não o ponto de partida.",
         text: "Escolho tecnologias e métodos de acordo com o problema, o público e o resultado esperado.",
         groups: [
-          { title: "Learning & Instructional Design", items: ["Storyline 360", "Rise 360", "SCORM", "Enable Now", "Genially", "Roteirização", "Arquitetura de conteúdo", "Learning Experience Design"] },
-          { title: "Visual & Interaction Design", items: ["Figma", "Photoshop", "Illustrator", "After Effects", "Camtasia", "Design de interfaces", "Design gráfico", "Prototipação"] },
-          { title: "Web & Digital Products", items: ["Next.js", "React", "TypeScript", "Tailwind CSS", "HTML", "CSS", "JavaScript", "Supabase", "Vercel", "GitHub"] },
-          { title: "AI-assisted Workflow", items: ["Prototipação acelerada", "Exploração de soluções", "Geração e refinamento de conteúdo", "Apoio ao desenvolvimento", "Automação de tarefas", "Criação de ativos visuais"] },
+          { title: "Aprendizagem e Design Instrucional", items: ["Storyline 360", "Rise 360", "SCORM", "Enable Now", "Genially", "Roteirização", "Arquitetura de conteúdo", "Design de experiências de aprendizagem"] },
+          { title: "Design Visual e Interação", items: ["Figma", "Photoshop", "Illustrator", "After Effects", "Camtasia", "Design de interfaces", "Design gráfico", "Prototipação"] },
+          { title: "Sites e Produtos Digitais", items: ["Next.js", "React", "TypeScript", "Tailwind CSS", "HTML", "CSS", "JavaScript", "Supabase", "Vercel", "GitHub"] },
+          { title: "Fluxo de trabalho com IA", items: ["Prototipação acelerada", "Exploração de soluções", "Geração e refinamento de conteúdo", "Apoio ao desenvolvimento", "Automação de tarefas", "Criação de ativos visuais"] },
         ],
       },
       experience: {
@@ -619,7 +619,7 @@ export const content: Record<Locale, Content> = {
         paragraphs: [
           "Minha trajetória começou no design visual e evoluiu para projetos de aprendizagem, tecnologia e produtos digitais. Ao longo dos anos, percebi que as áreas não estavam desconectadas.",
           "Hoje, atuo de forma multidisciplinar. Posso desenvolver uma experiência de aprendizagem, estruturar uma comunicação visual, desenhar uma interface ou construir uma aplicação web. O formato depende da necessidade; a forma de pensar permanece consistente.",
-          "Minha formação em Análise e Desenvolvimento de Sistemas, Design Instrucional e Gestão de Projetos complementa a experiência prática que construí trabalhando com design visual, e-learning, conteúdos corporativos e soluções digitais.",
+          "Minha formação em Análise e Desenvolvimento de Sistemas, Design Instrucional e Gestão de Projetos complementa a experiência prática que construí trabalhando com design visual, cursos digitais, conteúdos corporativos e soluções digitais.",
         ],
         education: ["Tecnólogo em Análise e Desenvolvimento de Sistemas — UNINOVE", "Pós-graduação em Design Instrucional — UNOPAR", "MBA em Gestão de Projetos"],
         principles: [
@@ -634,14 +634,14 @@ export const content: Record<Locale, Content> = {
             company: "Tata Consultancy Services",
             role: "Designer Instrucional e Designer Gráfico",
             period: "01/2024 — atual",
-            text: "Criação de materiais visuais para treinamentos corporativos, incluindo apresentações, infográficos, ícones, diagramas, elementos de UI e assets para experiências de aprendizagem em SAP S/4HANA. Colaboração com instructional designers, SMEs, business analysts e stakeholders, usando IA para apoiar ideação, estruturação de conteúdo e eficiência do fluxo criativo.",
+            text: "Criação de materiais visuais para treinamentos corporativos, incluindo apresentações, infográficos, ícones, diagramas, elementos de interface e ativos para experiências de aprendizagem em SAP S/4HANA. Colaboração com designers instrucionais, especialistas no assunto, analistas de negócio e partes interessadas, usando IA para apoiar ideação, estruturação de conteúdo e eficiência do fluxo criativo.",
             tools: ["Adobe Illustrator", "Photoshop", "Premiere", "Figma", "PowerPoint", "Microsoft Office", "Microsoft Teams", "ChatGPT", "Claude", "Gemini"],
           },
           {
             company: "Plural Desenvolvimento de Web Ltda",
             role: "Designer Gráfico e Designer Instrucional",
             period: "03/2021 — 12/2023",
-            text: "Desenvolvimento de identidades visuais, layouts, templates, PDFs, ícones, infográficos e assets multimídia para projetos de e-learning e treinamentos corporativos. Criação de elementos reutilizáveis e interfaces para cursos em Storyline e Rise, com foco em clareza, hierarquia, acessibilidade e consistência de marca.",
+            text: "Desenvolvimento de identidades visuais, layouts, templates, PDFs, ícones, infográficos e ativos multimídia para projetos de cursos digitais e treinamentos corporativos. Criação de elementos reutilizáveis e interfaces para cursos em Storyline e Rise, com foco em clareza, hierarquia, acessibilidade e consistência de marca.",
             tools: ["Figma", "Adobe Illustrator", "Photoshop", "InDesign", "After Effects", "Articulate Storyline", "Articulate Rise", "PowerPoint"],
           },
           {
@@ -661,7 +661,7 @@ export const content: Record<Locale, Content> = {
         text: "Estou disponível para oportunidades remotas e internacionais, projetos de design instrucional, design visual, produtos digitais e trabalhos que combinem design, tecnologia e inteligência artificial.",
         channels: ["WhatsApp: +55 35 98452-9241", "E-mail: jonatha.teixeira.business@gmail.com", "LinkedIn: linkedin.com/in/jonatha-l-teixeira-jlt"],
         fields: ["Nome", "E-mail", "Empresa", "Assunto", "Mensagem"],
-        subjects: ["Oportunidade profissional", "Instructional Design", "Visual Design", "Website ou aplicação", "Outro projeto"],
+        subjects: ["Oportunidade profissional", "Design instrucional", "Design visual", "Site ou aplicação", "Outro projeto"],
       },
     },
     footer: {

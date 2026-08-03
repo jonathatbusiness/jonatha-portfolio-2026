@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
+
+const siteUrl = "https://jonatha-teixeira-portfolio.vercel.app";
+const googleAnalyticsId = "G-0WP6QHSBFP";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -13,11 +17,11 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://jonathateixeira.com"),
+  metadataBase: new URL(siteUrl),
   applicationName: "Jonatha Teixeira Portfolio",
   creator: "Jonatha Teixeira",
   publisher: "Jonatha Teixeira",
-  authors: [{ name: "Jonatha Teixeira", url: "https://jonathateixeira.com" }],
+  authors: [{ name: "Jonatha Teixeira", url: siteUrl }],
   category: "portfolio",
   title: {
     default: "Jonatha Teixeira — Multidisciplinary Designer",
@@ -105,7 +109,18 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${spaceGrotesk.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        {children}
+        <Script src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}`} strategy="afterInteractive" />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){window.dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${googleAnalyticsId}');
+          `}
+        </Script>
+      </body>
     </html>
   );
 }
