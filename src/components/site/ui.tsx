@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { areaColors, type AreaId } from "@/lib/content";
+import Image from "next/image";
+import { areaColors, type AreaId, type Project } from "@/lib/content";
 import { RevealSection } from "./reveal-section";
 
 export function Container({
@@ -15,11 +16,13 @@ export function Container({
 export function Section({
   children,
   className = "",
+  id,
 }: Readonly<{
   children: React.ReactNode;
   className?: string;
+  id?: string;
 }>) {
-  return <RevealSection className={`py-20 sm:py-24 lg:py-32 ${className}`}>{children}</RevealSection>;
+  return <RevealSection id={id} className={`py-20 sm:py-24 lg:py-32 ${className}`}>{children}</RevealSection>;
 }
 
 export function SectionHeading({
@@ -88,4 +91,28 @@ export function ProjectVisual({ area }: Readonly<{ area: AreaId }>) {
       <div className="absolute left-8 top-14 h-20 w-44 rounded-2xl bg-[var(--color-paper)] shadow-[inset_0_0_0_1px_var(--color-border)]" />
     </div>
   );
+}
+
+export function ProjectImageFrame({
+  src,
+  alt,
+  priority = false,
+}: Readonly<{
+  src: string;
+  alt: string;
+  priority?: boolean;
+}>) {
+  return (
+    <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-linen)]">
+      <Image className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]" src={src} alt={alt} fill sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw" priority={priority} />
+    </div>
+  );
+}
+
+export function ProjectPreview({ project, priority = false }: Readonly<{ project: Project; priority?: boolean }>) {
+  if (project.coverImage) {
+    return <ProjectImageFrame src={project.coverImage} alt={project.media?.find((item) => item.src)?.alt ?? project.title} priority={priority} />;
+  }
+
+  return <ProjectVisual area={project.area} />;
 }

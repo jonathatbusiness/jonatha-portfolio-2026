@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { alternatePath, getContent, localizedPath, type Locale } from "@/lib/content";
+import { getContent, localizedPath, type Locale } from "@/lib/content";
 import { Container } from "./ui";
 
 export function Header({ locale, path }: Readonly<{ locale: Locale; path: string }>) {
@@ -37,7 +38,8 @@ export function Header({ locale, path }: Readonly<{ locale: Locale; path: string
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-[var(--color-navy)] text-[var(--color-paper)]">
       <Container className="flex h-20 items-center justify-between gap-8">
-        <Link className="text-base font-semibold text-[var(--color-paper)] transition-colors hover:text-[var(--color-accent)]" href={localizedPath(locale, "/")}>
+        <Link className="inline-flex items-center gap-3 text-base font-semibold text-[var(--color-paper)] transition-colors hover:text-[var(--color-accent)]" href={localizedPath(locale, "/")}>
+          <Image className="h-8 w-8 object-contain" src="/Logo.png" alt="" width={32} height={32} priority unoptimized />
           Jonatha Teixeira
         </Link>
         <nav className="hidden items-center gap-8 lg:flex" aria-label="Main navigation">
@@ -48,10 +50,8 @@ export function Header({ locale, path }: Readonly<{ locale: Locale; path: string
           ))}
         </nav>
         <div className="hidden items-center gap-3 lg:flex">
-          <Link className="nav-link" href={alternatePath(locale, path)}>
-            {locale === "en" ? "PT-BR" : "EN"}
-          </Link>
-          <Link className="rounded-xl border border-white/55 px-4 py-2 text-sm font-semibold text-[var(--color-paper)] transition-colors hover:border-[var(--color-accent)] hover:bg-[var(--color-accent)] hover:text-[var(--color-navy)]" href={localizedPath(locale, "/contact")}>
+          <LanguageSwitcher locale={locale} path={path} />
+          <Link className="inline-flex min-w-40 justify-center rounded-xl border border-white/55 px-4 py-2 text-sm font-semibold text-[var(--color-paper)] transition-colors hover:border-[var(--color-accent)] hover:bg-[var(--color-accent)] hover:text-[var(--color-navy)]" href={localizedPath(locale, "/#contact")}>
             {content.ui.letsTalk}
           </Link>
         </div>
@@ -100,25 +100,56 @@ export function Header({ locale, path }: Readonly<{ locale: Locale; path: string
                   </Link>
                 ))}
               </nav>
-              <div className="relative mt-12 grid gap-4 text-lg text-[var(--color-muted)]">
-                {content.expertise.map((item, index) => (
-                  <Link className="menu-stagger" href={localizedPath(locale, `/${item.id}`)} key={item.id} onClick={closeMenu} style={{ "--stagger": index + 4 } as React.CSSProperties}>
-                    {item.title}
-                  </Link>
-                ))}
-              </div>
               <div className="relative mt-12 flex flex-wrap gap-4 text-sm font-semibold uppercase tracking-[0.16em] text-[var(--color-graphite)]">
-                <Link href={alternatePath(locale, path)} onClick={closeMenu}>
-                  {locale === "en" ? "PT-BR" : "EN"}
-                </Link>
-                <a href="https://www.linkedin.com/">LinkedIn</a>
-                <a href="https://github.com/">GitHub</a>
-                <a href="mailto:hello@example.com">Email</a>
+                <LanguageSwitcher locale={locale} path={path} onNavigate={closeMenu} variant="drawer" />
+                <a href="https://www.linkedin.com/in/jonatha-l-teixeira-jlt/">LinkedIn</a>
+                <a href="https://wa.me/5535984529241">WhatsApp</a>
+                <a href="mailto:jonatha.teixeira.business@gmail.com">Email</a>
               </div>
             </div>
           </aside>
         </div>
       ) : null}
     </header>
+  );
+}
+
+function LanguageSwitcher({
+  locale,
+  path,
+  onNavigate,
+  variant = "header",
+}: Readonly<{
+  locale: Locale;
+  path: string;
+  onNavigate?: () => void;
+  variant?: "header" | "drawer";
+}>) {
+  const currentClass =
+    variant === "header"
+      ? "text-[var(--color-navy)]"
+      : "text-[var(--color-paper)]";
+  const inactiveClass =
+    variant === "header"
+      ? "text-[var(--color-paper)] hover:text-[var(--color-accent)]"
+      : "text-[var(--color-graphite)] hover:text-[var(--color-accent)]";
+
+  return (
+    <div
+      className={`language-switcher relative inline-grid w-[8.75rem] grid-cols-2 items-center rounded-xl border p-1 text-center text-xs font-semibold uppercase tracking-[0.08em] ${
+        variant === "header" ? "border-white/40" : "border-[var(--color-border)]"
+      }`}
+      data-locale={locale}
+      data-variant={variant}
+      aria-label="Language selector"
+    >
+      <span className="language-switcher-thumb absolute bottom-1 top-1 rounded-lg transition-transform duration-300 ease-out" aria-hidden="true" />
+      <Link className={`relative z-10 whitespace-nowrap rounded-lg px-2 py-2 transition-colors ${locale === "en" ? currentClass : inactiveClass}`} href={localizedPath("en", path)} onClick={onNavigate} aria-current={locale === "en" ? "true" : undefined}>
+        EN
+      </Link>
+      <Link className={`relative z-10 whitespace-nowrap rounded-lg px-2 py-2 transition-colors ${locale === "pt-br" ? currentClass : inactiveClass}`} href={localizedPath("pt-br", path)} onClick={onNavigate} aria-current={locale === "pt-br" ? "true" : undefined}>
+        PT-BR
+      </Link>
+    </div>
   );
 }

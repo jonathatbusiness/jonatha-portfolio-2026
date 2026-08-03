@@ -5,9 +5,11 @@ import { useEffect, useRef, useState } from "react";
 export function RevealSection({
   children,
   className = "",
+  id,
 }: Readonly<{
   children: React.ReactNode;
   className?: string;
+  id?: string;
 }>) {
   const ref = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
@@ -33,7 +35,7 @@ export function RevealSection({
   }, []);
 
   return (
-    <section ref={ref} className={`reveal-section ${visible ? "is-visible" : ""} ${className}`}>
+    <section ref={ref} id={id} className={`reveal-section ${visible ? "is-visible" : ""} ${className}`}>
       {children}
     </section>
   );

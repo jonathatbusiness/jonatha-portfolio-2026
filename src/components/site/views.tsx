@@ -1,9 +1,13 @@
 import Link from "next/link";
+import Image from "next/image";
+import { FiBookOpen, FiCpu, FiGlobe, FiLayers, FiMail, FiPenTool, FiTarget, FiTool, FiZap } from "react-icons/fi";
+import { FaLinkedinIn, FaWhatsapp } from "react-icons/fa6";
 import { areaColors, getContent, getExpertise, getProject, localizedPath, type AreaId, type Locale } from "@/lib/content";
 import { Footer } from "./footer";
 import { Header } from "./header";
+import { MediaGallery } from "./media-gallery";
 import { WorkFilter } from "./work-filter";
-import { AreaMark, ButtonLink, Container, ProjectVisual, Section, SectionHeading } from "./ui";
+import { AreaMark, ButtonLink, Container, ProjectPreview, ProjectVisual, Section, SectionHeading } from "./ui";
 
 function PageFrame({
   locale,
@@ -17,7 +21,7 @@ function PageFrame({
   return (
     <>
       <Header locale={locale} path={path} />
-      <main className="flex-1">{children}</main>
+      <main className="route-content flex-1">{children}</main>
       <Footer locale={locale} />
     </>
   );
@@ -59,9 +63,7 @@ function ExpertiseCards({ locale }: Readonly<{ locale: Locale }>) {
               </li>
             ))}
           </ul>
-          <Link className="mt-auto inline-block pt-6 font-semibold text-[var(--color-graphite)] underline decoration-[var(--area-color)] underline-offset-4" href={localizedPath(locale, `/${item.id}`)}>
-            {item.cta}
-          </Link>
+          <span className="mt-auto inline-block pt-6 font-semibold text-[var(--area-color)]">{item.cta}</span>
         </article>
       ))}
     </div>
@@ -119,13 +121,13 @@ function ProjectGrid({ locale, limit, area }: Readonly<{ locale: Locale; limit?:
     <div className="grid gap-6 md:grid-cols-3">
       {projects.map((project) => (
         <Link className="group overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-warm-white)]" href={localizedPath(locale, `/work/${project.slug}`)} key={project.slug}>
-          <ProjectVisual area={project.area} />
+          <ProjectPreview project={project} />
           <div className="p-6">
             <div className="flex items-center gap-2 text-sm font-semibold" style={{ color: areaColors[project.area] }}>
               <AreaMark area={project.area} />
               {areaLabels[project.area]}
             </div>
-            <h3 className="mt-4 text-2xl font-semibold leading-tight text-[var(--color-graphite)] group-hover:underline group-hover:decoration-[var(--color-accent)] group-hover:underline-offset-4">
+            <h3 className="mt-4 text-xl font-semibold leading-tight text-[var(--color-graphite)] group-hover:underline group-hover:decoration-[var(--color-accent)] group-hover:underline-offset-4">
               {project.title}
             </h3>
             <p className="mt-3 text-sm font-semibold text-[var(--color-subtle)]">{Array.isArray(project.role) ? project.role.slice(0, 2).join(" · ") : project.role}</p>
@@ -165,7 +167,7 @@ export function HomeView({ locale }: Readonly<{ locale: Locale }>) {
             <div className="hidden lg:absolute lg:left-8 lg:right-8 lg:top-8 lg:block lg:h-px lg:bg-[var(--color-accent)]" />
             <div className="relative grid gap-4 lg:absolute lg:bottom-8 lg:left-8 lg:right-8">
               {content.expertise.map((item, index) => (
-                <Link className="hero-card grid grid-cols-[auto_1fr] gap-4 rounded-2xl border border-[var(--color-border)] bg-[var(--color-paper)] p-5 transition-all duration-300 ease-out hover:-translate-y-1 hover:border-[var(--color-accent)]" href={localizedPath(locale, `/${item.id}`)} key={item.id} style={{ "--stagger": index } as React.CSSProperties}>
+                <Link className="hero-card grid grid-cols-[auto_1fr] gap-4 rounded-2xl border border-[var(--color-border)] bg-[var(--color-paper)] p-5 transition-all duration-300 ease-out hover:-translate-y-1 hover:border-[var(--color-accent)]" href={localizedPath(locale, "/about#areas")} key={item.id} style={{ "--stagger": index } as React.CSSProperties}>
                   <span className="text-sm font-semibold" style={{ color: areaColors[item.id] }}>
                     0{index + 1}
                   </span>
@@ -181,44 +183,6 @@ export function HomeView({ locale }: Readonly<{ locale: Locale }>) {
       </section>
 
       <Section>
-        <Container>
-          <div className="mb-12 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-            <SectionHeading {...content.home.featured} />
-            <ButtonLink href={localizedPath(locale, "/work")} variant="secondary">
-              {content.home.featured.cta}
-            </ButtonLink>
-          </div>
-          <ProjectGrid locale={locale} limit={3} />
-        </Container>
-      </Section>
-
-      <Section className="bg-[var(--color-linen)]">
-        <Container>
-          <div className="mb-12">
-            <SectionHeading {...content.home.expertise} />
-          </div>
-          <ExpertiseCards locale={locale} />
-        </Container>
-      </Section>
-
-      <Section>
-        <Container>
-          <div className="mb-12">
-            <SectionHeading {...content.home.selected} />
-          </div>
-          <WorkFilter
-            locale={locale}
-            projects={content.projects}
-            labels={{
-              all: content.ui.all,
-              caseStudy: content.ui.caseStudy,
-              areas: Object.fromEntries(content.expertise.map((item) => [item.id, item.title])) as Record<AreaId, string>,
-            }}
-          />
-        </Container>
-      </Section>
-
-      <Section className="bg-[var(--color-linen)]">
         <Container className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr]">
           <SectionHeading eyebrow={content.home.about.eyebrow} title={content.home.about.title} />
           <div className="space-y-6 text-lg leading-8 text-[var(--color-muted)]">
@@ -232,58 +196,27 @@ export function HomeView({ locale }: Readonly<{ locale: Locale }>) {
         </Container>
       </Section>
 
-      <Section>
+      <Section className="bg-[var(--color-linen)] scroll-mt-24" id="areas">
         <Container>
-          <div className="mb-12">
-            <SectionHeading {...content.home.skills} />
-          </div>
-          <div className="grid gap-6 md:grid-cols-2">
-            {content.home.skills.groups.map((group) => (
-              <article className="border-t border-[var(--color-border)] pt-6" key={group.title}>
-                <h3 className="text-2xl font-semibold text-[var(--color-graphite)]">{group.title}</h3>
-                <ul className="mt-5 flex flex-wrap gap-2">
-                  {group.items.map((item) => (
-                    <li className="rounded-lg bg-[var(--color-linen)] px-3 py-2 text-sm text-[var(--color-muted)]" key={item}>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </article>
-            ))}
-          </div>
-        </Container>
-      </Section>
-
-      <Section className="bg-[var(--color-linen)]">
-        <Container className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
-          <SectionHeading {...content.home.experience} />
-          <div className="space-y-4">
-            {content.home.experience.items.map((item) => (
-              <article className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-paper)] p-6" key={`${item.company}-${item.period}`}>
-                <p className="text-sm font-semibold text-[var(--color-accent)]">{item.period}</p>
-                <h3 className="mt-2 text-2xl font-semibold text-[var(--color-graphite)]">{item.company}</h3>
-                <p className="mt-2 text-[var(--color-muted)]">{item.role}</p>
-              </article>
-            ))}
-            <ButtonLink href={localizedPath(locale, "/about")} variant="secondary">
-              {content.home.experience.cta}
+          <div className="mb-12 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+            <SectionHeading {...content.home.featured} />
+            <ButtonLink href={localizedPath(locale, "/work")} variant="secondary">
+              {content.home.featured.cta}
             </ButtonLink>
           </div>
+          <ProjectGrid locale={locale} limit={3} />
         </Container>
       </Section>
 
-      <Section>
+      <Section className="scroll-mt-24" id="contact">
         <Container>
           <div className="rounded-3xl bg-[var(--color-graphite)] p-8 text-[var(--color-paper)] sm:p-12 lg:p-16">
-            <h2 className="max-w-4xl text-4xl font-semibold leading-tight sm:text-6xl">{content.home.contact.title}</h2>
+            <h2 className="max-w-4xl text-4xl font-semibold leading-tight sm:text-5xl">{content.home.contact.title}</h2>
             <p className="mt-6 max-w-3xl text-lg leading-8 text-white/75">{content.home.contact.text}</p>
-            <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-              <ButtonLink href={localizedPath(locale, "/contact")} variant="light">
-                {content.home.contact.primary}
-              </ButtonLink>
-              <ButtonLink href="https://www.linkedin.com/" variant="light">
-                {content.home.contact.secondary}
-              </ButtonLink>
+            <div className="mt-10 grid gap-3 lg:grid-cols-3">
+              <ContactLink icon={<FaWhatsapp />} label="WhatsApp" value="+55 35 98452-9241" href="https://wa.me/5535984529241" />
+              <ContactLink icon={<FiMail />} label={locale === "en" ? "Email" : "E-mail"} value="jonatha.teixeira.business@gmail.com" href="mailto:jonatha.teixeira.business@gmail.com" />
+              <ContactLink icon={<FaLinkedinIn />} label="LinkedIn" value="jonatha-l-teixeira-jlt" href="https://www.linkedin.com/in/jonatha-l-teixeira-jlt/" />
             </div>
           </div>
         </Container>
@@ -385,30 +318,81 @@ export function AboutView({ locale }: Readonly<{ locale: Locale }>) {
 
   return (
     <PageFrame locale={locale} path="/about">
-      <PageHero locale={locale} page={page} />
+      <PageHero locale={locale} page={page} imageSrc="/jonatha-teixeira.webp" imageAlt="Jonatha Teixeira" />
       <Section>
-        <Container className="grid gap-12 lg:grid-cols-[1fr_0.8fr]">
+        <Container className="grid gap-12 lg:grid-cols-[1fr_0.65fr]">
           <div className="space-y-6 text-lg leading-8 text-[var(--color-muted)]">
             {page.paragraphs.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
           </div>
           <div className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-linen)] p-6">
-            <h2 className="text-2xl font-semibold text-[var(--color-graphite)]">{locale === "en" ? "Education and languages" : "Formação e idiomas"}</h2>
-            <ul className="mt-5 grid gap-3 text-[var(--color-muted)]">
-              {[...page.education, ...page.languages].map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
+            <EducationGroup icon={<FiBookOpen />} title={locale === "en" ? "Education" : "Formação"} items={page.education} />
+            <EducationGroup icon={<FiGlobe />} title={locale === "en" ? "Languages" : "Idiomas"} items={page.languages} className="mt-8" />
           </div>
         </Container>
       </Section>
       <Section className="bg-[var(--color-linen)]">
         <Container>
+          <div className="mb-12">
+            <SectionHeading {...content.home.expertise} />
+          </div>
+          <ExpertiseCards locale={locale} />
+        </Container>
+      </Section>
+      <Section>
+        <Container>
+          <div className="mb-12">
+            <SectionHeading {...content.home.skills} />
+          </div>
+          <div className="grid gap-6 md:grid-cols-2">
+            {content.home.skills.groups.map((group, index) => (
+              <article className="border-t border-[var(--color-border)] pt-6" key={group.title}>
+                <AboutIcon index={index} />
+                <h3 className="mt-4 text-2xl font-semibold text-[var(--color-graphite)]">{group.title}</h3>
+                <ul className="mt-5 flex flex-wrap gap-2">
+                  {group.items.map((item) => (
+                    <li className="rounded-lg bg-[var(--color-linen)] px-3 py-2 text-sm text-[var(--color-muted)]" key={item}>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
+        </Container>
+      </Section>
+      <Section className="bg-[var(--color-linen)]">
+        <Container>
+          <div className="mb-12">
+            <SectionHeading {...content.home.experience} />
+          </div>
+          <div className="grid gap-5">
+            {page.experience.map((item) => (
+              <article className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-paper)] p-6" key={`${item.company}-${item.period}`}>
+                <p className="text-sm font-semibold text-[var(--color-accent)]">{item.period}</p>
+                <h3 className="mt-2 text-2xl font-semibold text-[var(--color-graphite)]">{item.company}</h3>
+                <p className="mt-1 font-semibold text-[var(--color-muted)]">{item.role}</p>
+                <p className="mt-4 max-w-5xl leading-7 text-[var(--color-muted)]">{item.text}</p>
+                <ul className="mt-5 flex flex-wrap gap-2">
+                  {item.tools.map((tool) => (
+                    <li className="rounded-lg bg-[var(--color-linen)] px-3 py-2 text-sm text-[var(--color-muted)]" key={tool}>
+                      {tool}
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
+        </Container>
+      </Section>
+      <Section>
+        <Container>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {page.principles.map((principle) => (
+            {page.principles.map((principle, index) => (
               <article className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-paper)] p-6" key={principle.title}>
-                <h3 className="text-2xl font-semibold text-[var(--color-graphite)]">{principle.title}</h3>
+                <AboutIcon index={index} />
+                <h3 className="mt-4 text-2xl font-semibold text-[var(--color-graphite)]">{principle.title}</h3>
                 <p className="mt-4 leading-7 text-[var(--color-muted)]">{principle.text}</p>
               </article>
             ))}
@@ -427,33 +411,10 @@ export function ContactView({ locale }: Readonly<{ locale: Locale }>) {
     <PageFrame locale={locale} path="/contact">
       <PageHero locale={locale} page={page} />
       <Section>
-        <Container className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
-          <div>
-            <h2 className="text-2xl font-semibold text-[var(--color-graphite)]">{locale === "en" ? "Channels" : "Canais"}</h2>
-            <ul className="mt-6 grid gap-3 text-lg text-[var(--color-muted)]">
-              {page.channels.map((channel) => (
-                <li key={channel}>{channel}</li>
-              ))}
-            </ul>
-            <p className="mt-8 rounded-2xl bg-[var(--color-linen)] p-5 text-[var(--color-muted)]">{content.ui.responseTime}</p>
-          </div>
-          <form className="grid gap-5 rounded-2xl border border-[var(--color-border)] bg-[var(--color-warm-white)] p-6">
-            {page.fields.map((field) => (
-              <label className="grid gap-2 text-sm font-semibold text-[var(--color-graphite)]" key={field}>
-                {field}
-                {field.toLowerCase().includes("message") || field.toLowerCase().includes("mensagem") ? (
-                  <textarea className="min-h-36 rounded-xl border border-[var(--color-border)] bg-[var(--color-paper)] px-4 py-3" />
-                ) : (
-                  <input className="h-12 rounded-xl border border-[var(--color-border)] bg-[var(--color-paper)] px-4" type={field.toLowerCase().includes("email") || field.toLowerCase().includes("e-mail") ? "email" : "text"} />
-                )}
-              </label>
-            ))}
-            <label className="sr-only">
-              Website
-              <input tabIndex={-1} autoComplete="off" />
-            </label>
-            <ButtonLink href="mailto:hello@example.com">{content.ui.letsTalk}</ButtonLink>
-          </form>
+        <Container className="grid gap-4 md:grid-cols-3">
+          <ContactLink icon={<FaWhatsapp />} label="WhatsApp" value="+55 35 98452-9241" href="https://wa.me/5535984529241" dark={false} />
+          <ContactLink icon={<FiMail />} label={locale === "en" ? "Email" : "E-mail"} value="jonatha.teixeira.business@gmail.com" href="mailto:jonatha.teixeira.business@gmail.com" dark={false} />
+          <ContactLink icon={<FaLinkedinIn />} label="LinkedIn" value="jonatha-l-teixeira-jlt" href="https://www.linkedin.com/in/jonatha-l-teixeira-jlt/" dark={false} />
         </Container>
       </Section>
     </PageFrame>
@@ -471,12 +432,12 @@ export function ProjectView({ locale, slug }: Readonly<{ locale: Locale; slug: s
 
   return (
     <PageFrame locale={locale} path={`/work/${slug}`}>
-      <PageHero locale={locale} page={{ eyebrow: content.ui.caseStudy, title: project.title, text: project.subtitle ?? project.summary }} />
+      <PageHero locale={locale} page={{ eyebrow: content.ui.caseStudy, title: project.title, text: project.subtitle ?? project.summary }} compact />
       <Section>
-        <Container className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr]">
+        <Container className={project.media?.[0]?.type === "video" ? "max-w-5xl" : "grid gap-10 lg:grid-cols-[0.85fr_1.15fr]"}>
           <div>
             <ProjectMediaBlock project={project} locale={locale} />
-            {project.links?.length ? (
+            {project.media?.[0]?.type !== "video" && project.links?.length ? (
               <div className="mt-6 flex flex-wrap gap-3">
                 {project.links.map((link) => (
                   <a className="inline-flex min-h-12 items-center justify-center rounded-xl border border-[var(--color-accent)] bg-[var(--color-accent)] px-5 text-sm font-semibold text-[var(--color-paper)] transition-colors hover:bg-[var(--color-accent-hover)]" href={link.href} key={link.href} target={link.external ? "_blank" : undefined} rel={link.external ? "noopener noreferrer" : undefined}>
@@ -486,7 +447,7 @@ export function ProjectView({ locale, slug }: Readonly<{ locale: Locale; slug: s
               </div>
             ) : null}
           </div>
-          <div className="space-y-8">
+          <div className={project.media?.[0]?.type === "video" ? "mt-10 grid gap-8 md:grid-cols-3" : "space-y-8"}>
             <MetaList title={locale === "en" ? "Role" : "Papel"} items={Array.isArray(project.role) ? project.role : [project.role]} />
             <MetaList title={locale === "en" ? "Services" : "Serviços"} items={project.services ?? []} />
             <MetaList title={locale === "en" ? "Tools" : "Ferramentas"} items={project.tools ?? []} />
@@ -494,8 +455,8 @@ export function ProjectView({ locale, slug }: Readonly<{ locale: Locale; slug: s
         </Container>
       </Section>
       <Section className="bg-[var(--color-linen)]">
-        <Container className="grid gap-10 lg:grid-cols-[0.75fr_1.25fr]">
-          <SectionHeading eyebrow={project.client ?? project.status} title={project.summary} />
+        <Container className="grid gap-10 lg:grid-cols-[0.72fr_1.28fr]">
+          <SectionHeading eyebrow={project.client ?? project.status} title={project.summary} className="case-summary-heading" />
           <div className="space-y-10">
             {project.content ? (
               <>
@@ -513,14 +474,14 @@ export function ProjectView({ locale, slug }: Readonly<{ locale: Locale; slug: s
       </Section>
       <Section>
         <Container>
-          <div className="grid gap-6 md:grid-cols-2">
-            <Link className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-warm-white)] p-6 transition-colors hover:border-[var(--color-accent)]" href={localizedPath(locale, `/work/${previousProject.slug}`)}>
-              <p className="text-sm font-semibold text-[var(--color-accent)]">{locale === "en" ? "Previous project" : "Projeto anterior"}</p>
-              <h2 className="mt-2 text-2xl font-semibold text-[var(--color-graphite)]">{previousProject.title}</h2>
+          <div className="flex flex-col justify-between gap-3 border-y border-[var(--color-border)] py-5 md:flex-row">
+            <Link className="group inline-flex items-center gap-3 text-sm font-semibold text-[var(--color-muted)] transition-colors hover:text-[var(--color-accent)]" href={localizedPath(locale, `/work/${previousProject.slug}`)}>
+              <span aria-hidden="true">←</span>
+              <span>{locale === "en" ? "Previous" : "Anterior"}: <span className="text-[var(--color-graphite)] group-hover:text-[var(--color-accent)]">{previousProject.title}</span></span>
             </Link>
-            <Link className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-warm-white)] p-6 transition-colors hover:border-[var(--color-accent)]" href={localizedPath(locale, `/work/${nextProject.slug}`)}>
-              <p className="text-sm font-semibold text-[var(--color-accent)]">{locale === "en" ? "Next project" : "Próximo projeto"}</p>
-              <h2 className="mt-2 text-2xl font-semibold text-[var(--color-graphite)]">{nextProject.title}</h2>
+            <Link className="group inline-flex items-center justify-end gap-3 text-sm font-semibold text-[var(--color-muted)] transition-colors hover:text-[var(--color-accent)]" href={localizedPath(locale, `/work/${nextProject.slug}`)}>
+              <span>{locale === "en" ? "Next" : "Próximo"}: <span className="text-[var(--color-graphite)] group-hover:text-[var(--color-accent)]">{nextProject.title}</span></span>
+              <span aria-hidden="true">→</span>
             </Link>
           </div>
           <div className="mt-12">
@@ -535,19 +496,66 @@ export function ProjectView({ locale, slug }: Readonly<{ locale: Locale; slug: s
   );
 }
 
-function PageHero({ locale, page }: Readonly<{ locale: Locale; page: { eyebrow: string; title: string; text: string } }>) {
+function PageHero({
+  locale,
+  page,
+  compact = false,
+  imageSrc,
+  imageAlt = "",
+}: Readonly<{
+  locale: Locale;
+  page: { eyebrow: string; title: string; text: string };
+  compact?: boolean;
+  imageSrc?: string;
+  imageAlt?: string;
+}>) {
   return (
     <section className="border-b border-[var(--color-border)] bg-[var(--color-linen)]">
-      <Container className="py-20 sm:py-24 lg:py-32">
-        <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[var(--color-accent)]">{page.eyebrow}</p>
-        <h1 className="mt-5 max-w-5xl text-5xl font-semibold leading-tight text-[var(--color-graphite)] sm:text-7xl">{page.title}</h1>
-        {page.text ? <p className="mt-6 max-w-3xl text-xl leading-9 text-[var(--color-muted)]">{page.text}</p> : null}
-        <div className="mt-10">
-          <ButtonLink href={localizedPath(locale, "/contact")} variant="secondary">
-            {getContent(locale).ui.letsTalk}
-          </ButtonLink>
+      <Container className={`page-hero ${compact ? "py-14 sm:py-16 lg:py-20" : "py-20 sm:py-24 lg:py-28"}`}>
+        <div className={imageSrc ? "grid items-center gap-12 lg:grid-cols-[1fr_360px]" : ""}>
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[var(--color-accent)]">{page.eyebrow}</p>
+            <h1 className={`${compact ? "mt-5 max-w-4xl text-4xl sm:text-5xl lg:text-6xl" : "mt-5 max-w-5xl text-5xl sm:text-6xl lg:text-7xl"} font-semibold leading-tight text-[var(--color-graphite)]`}>{page.title}</h1>
+            {page.text ? <p className="mt-6 max-w-3xl text-xl leading-9 text-[var(--color-muted)]">{page.text}</p> : null}
+            <div className="mt-10">
+              <ButtonLink href={localizedPath(locale, "/#contact")} variant="secondary">
+                {getContent(locale).ui.letsTalk}
+              </ButtonLink>
+            </div>
+          </div>
+          {imageSrc ? (
+            <div className="relative min-h-[420px] overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-paper)] shadow-[0_24px_60px_rgba(43,42,40,0.08)]">
+              <Image className="object-cover" src={imageSrc} alt={imageAlt} fill sizes="(min-width: 1024px) 360px, 100vw" priority />
+            </div>
+          ) : null}
         </div>
       </Container>
+    </section>
+  );
+}
+
+function EducationGroup({
+  icon,
+  title,
+  items,
+  className = "",
+}: Readonly<{
+  icon: React.ReactNode;
+  title: string;
+  items: string[];
+  className?: string;
+}>) {
+  return (
+    <section className={className}>
+      <h2 className="flex items-center gap-3 text-2xl font-semibold text-[var(--color-graphite)]">
+        <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--color-accent)] text-lg text-[var(--color-paper)]">{icon}</span>
+        {title}
+      </h2>
+      <ul className="mt-5 list-disc space-y-3 pl-6 text-[var(--color-muted)] marker:text-[var(--color-accent)]">
+        {items.map((item) => (
+          <li key={item}>{item}</li>
+        ))}
+      </ul>
     </section>
   );
 }
@@ -584,6 +592,11 @@ function MetaList({ title, items }: Readonly<{ title: string; items: string[] }>
 
 function ProjectMediaBlock({ project, locale }: Readonly<{ project: NonNullable<ReturnType<typeof getProject>>; locale: Locale }>) {
   const primary = project.media?.[0];
+  const imageMedia = project.media?.filter((item): item is typeof item & { src: string } => Boolean(item.src)) ?? [];
+
+  if (imageMedia.length) {
+    return <MediaGallery items={imageMedia} />;
+  }
 
   if (primary?.type === "video" && primary.videoId) {
     return (
@@ -619,4 +632,43 @@ function ProjectMediaBlock({ project, locale }: Readonly<{ project: NonNullable<
   }
 
   return <ProjectVisual area={project.area} />;
+}
+
+function AboutIcon({ index }: Readonly<{ index: number }>) {
+  const icons = [FiTarget, FiTool, FiPenTool, FiZap, FiLayers, FiCpu];
+  const Icon = icons[index % icons.length];
+  return (
+    <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--color-linen)] text-xl text-[var(--color-accent)]">
+      <Icon aria-hidden="true" />
+    </span>
+  );
+}
+
+function ContactLink({
+  icon,
+  label,
+  value,
+  href,
+  dark = true,
+}: Readonly<{
+  icon: React.ReactNode;
+  label: string;
+  value: string;
+  href: string;
+  dark?: boolean;
+}>) {
+  return (
+    <a
+      className={`group rounded-2xl border p-5 transition-all duration-300 hover:-translate-y-1 ${
+        dark ? "border-white/15 bg-white/5 text-[var(--color-paper)] hover:border-[var(--color-accent)]" : "border-[var(--color-border)] bg-[var(--color-warm-white)] text-[var(--color-graphite)] hover:border-[var(--color-accent)]"
+      }`}
+      href={href}
+      target={href.startsWith("http") ? "_blank" : undefined}
+      rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+    >
+      <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--color-accent)] text-xl text-[var(--color-paper)]">{icon}</span>
+      <span className={`mt-4 block text-sm font-semibold uppercase tracking-[0.14em] ${dark ? "text-white/60" : "text-[var(--color-muted)]"}`}>{label}</span>
+      <span className="mt-2 block break-words font-semibold">{value}</span>
+    </a>
+  );
 }

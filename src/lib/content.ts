@@ -137,6 +137,7 @@ type Content = {
       paragraphs: string[];
       education: string[];
       principles: { title: string; text: string }[];
+      experience: { company: string; role: string; period: string; text: string; tools: string[] }[];
       languages: string[];
       cta: string;
     };
@@ -178,7 +179,7 @@ const ptPath = (path: string) => `/pt-br${path === "/" ? "" : path}`;
 const englishExpertise: Expertise[] = [
   {
     id: "instructional-design",
-    title: "Instructional Design",
+    title: "Design Instrucional",
     short: "Learning experiences that organize complex content and support practical application.",
     description:
       "I design digital learning experiences that turn complex information into structured journeys. The work combines instructional strategy, content architecture, interaction design and visual production.",
@@ -230,7 +231,7 @@ const englishExpertise: Expertise[] = [
   },
   {
     id: "digital-products",
-    title: "Produtos Digitais",
+    title: "Digital Products",
     short: "Websites and applications that connect strategy, experience and technology.",
     description:
       "I design and build digital experiences that solve real needs, from product definition and UX to interface, prototyping, front-end development and service integration.",
@@ -277,7 +278,7 @@ const portugueseExpertise: Expertise[] = [
       "SCORM",
       "Learning Experience Design",
     ],
-    cta: "Explorar Instructional Design",
+    cta: "Explorar Design Instrucional",
     process: [
       "Entender o público, o contexto e a necessidade",
       "Organizar o conteúdo e os objetivos",
@@ -289,7 +290,7 @@ const portugueseExpertise: Expertise[] = [
   },
   {
     id: "visual-design",
-    title: "Visual Design",
+    title: "Design Visual",
     short: "Sistemas visuais que tornam mensagens mais claras, consistentes e memoráveis.",
     description:
       "Crio soluções visuais para marcas, conteúdos, interfaces e comunicações digitais. Meu trabalho combina hierarquia, composição, tipografia, cor e contexto.",
@@ -303,7 +304,7 @@ const portugueseExpertise: Expertise[] = [
       "Tratamento de imagens",
       "Design de interfaces",
     ],
-    cta: "Explorar Visual Design",
+    cta: "Explorar Design Visual",
     process: [
       "Compreender a mensagem e o contexto",
       "Identificar o público e a intenção",
@@ -315,7 +316,7 @@ const portugueseExpertise: Expertise[] = [
   },
   {
     id: "digital-products",
-    title: "Digital Products",
+    title: "Produtos Digitais",
     short: "Websites e aplicações que conectam estratégia, experiência e tecnologia.",
     description:
       "Projeto e construo experiências digitais que resolvem necessidades reais, combinando definição de produto, UX, interface, prototipação, desenvolvimento front-end, integrações e IA aplicada.",
@@ -356,9 +357,8 @@ export const content: Record<Locale, Content> = {
     },
     nav: [
       { label: "Work", href: "/work" },
-      { label: "Expertise", href: "/expertise" },
       { label: "About", href: "/about" },
-      { label: "Contact", href: "/contact" },
+      { label: "Contact", href: "/#contact" },
     ],
     ui: {
       menu: "Menu",
@@ -366,7 +366,7 @@ export const content: Record<Locale, Content> = {
       language: "Language",
       letsTalk: "Let's talk",
       viewProjects: "View projects",
-      viewExperience: "Explore my experience",
+      viewExperience: "More about me",
       allProjects: "View all projects",
       all: "All",
       caseStudy: "Case study",
@@ -404,7 +404,7 @@ export const content: Record<Locale, Content> = {
           "I am a multidisciplinary designer with experience in visual design, learning content development and digital product creation. My background in technology and corporate projects expanded my ability to connect business needs, user experience and visual execution.",
           "I like to understand the problem before choosing the tool. In some projects, the best solution is an interactive course. In others, it is an interface, a visual system, an automation or a web application.",
         ],
-        cta: "Explore my path",
+        cta: "More about me",
       },
       skills: {
         eyebrow: "Skills and tools",
@@ -422,15 +422,16 @@ export const content: Record<Locale, Content> = {
         title: "Experience in design, learning and technology projects.",
         text: "My path includes visual creation, digital content development, corporate projects and solutions for different audiences and contexts.",
         items: [
-          { company: "TCS Brasil", role: "Business Analyst / Learning Content and Digital Solutions", period: "2024 — present" },
-          { company: "Plural Web", role: "Visual Designer and E-learning Designer", period: "2021 — 2023" },
+          { company: "Tata Consultancy Services", role: "Instructional Designer & Graphic Designer", period: "01/2024 — present" },
+          { company: "Plural Desenvolvimento de Web", role: "Graphic Designer & Instructional Designer", period: "03/2021 — 12/2023" },
+          { company: "Nova Concursos", role: "Graphic Designer and Marketing Assistant", period: "02/2018 — 03/2020" },
         ],
         cta: "View full experience",
       },
       contact: {
         title: "Have an opportunity, a project or a problem that needs a clearer solution?",
         text: "I am available to discuss opportunities in instructional design, visual design, digital products and projects that combine design, technology and artificial intelligence.",
-        primary: "Get in touch",
+        primary: "Send a message",
         secondary: "View LinkedIn",
       },
     },
@@ -462,14 +463,37 @@ export const content: Record<Locale, Content> = {
           { title: "AI accelerates, but does not replace decisions", text: "I use artificial intelligence to explore, build and automate, while remaining responsible for choices and results." },
           { title: "Versatility with direction", text: "Working across areas does not mean treating everything the same way. Each project requires depth, context and its own criteria." },
         ],
-        languages: ["Portuguese: native", "English: B2 / Upper-intermediate", "French: in development"],
+        experience: [
+          {
+            company: "Tata Consultancy Services",
+            role: "Instructional Designer & Graphic Designer",
+            period: "01/2024 — present",
+            text: "Designed visual materials for corporate training programs, including presentations, infographics, icons, diagrams, UI elements and assets for SAP S/4HANA learning experiences. Collaborated with instructional designers, SMEs, business analysts and stakeholders while using AI tools to support ideation, content structure and workflow efficiency.",
+            tools: ["Adobe Illustrator", "Photoshop", "Premiere", "Figma", "PowerPoint", "Microsoft Office", "Microsoft Teams", "ChatGPT", "Claude", "Gemini"],
+          },
+          {
+            company: "Plural Desenvolvimento de Web Ltda",
+            role: "Graphic Designer & Instructional Designer",
+            period: "03/2021 — 12/2023",
+            text: "Developed visual identities, layouts, templates, PDFs, icons, infographics and multimedia assets for e-learning and corporate training projects. Created reusable assets and interface elements for Storyline and Rise courses with a focus on clarity, hierarchy, accessibility and brand consistency.",
+            tools: ["Figma", "Adobe Illustrator", "Photoshop", "InDesign", "After Effects", "Articulate Storyline", "Articulate Rise", "PowerPoint"],
+          },
+          {
+            company: "Nova Concursos",
+            role: "Graphic Designer and Marketing Assistant",
+            period: "02/2018 — 03/2020",
+            text: "Created marketing visuals for digital campaigns, marketplaces, e-commerce pages, social media, YouTube, email marketing, banners, product visuals and landing pages in a high-volume online education environment.",
+            tools: ["Adobe Illustrator", "Photoshop", "After Effects", "Premiere", "YouTube Studio", "Instagram Analytics"],
+          },
+        ],
+        languages: ["Portuguese: native", "English: B2 / Upper-intermediate", "Spanish: B2"],
         cta: "View my projects",
       },
       contact: {
         eyebrow: "Contact",
         title: "Let's talk about an opportunity, a project or an idea.",
         text: "I am available for remote and international opportunities, instructional design, visual design, digital products and work that combines design, technology and artificial intelligence.",
-        channels: ["Email", "LinkedIn", "GitHub"],
+        channels: ["WhatsApp: +55 35 98452-9241", "Email: jonatha.teixeira.business@gmail.com", "LinkedIn: linkedin.com/in/jonatha-l-teixeira-jlt"],
         fields: ["Name", "Email", "Company", "Subject", "Message"],
         subjects: ["Professional opportunity", "Instructional Design", "Visual Design", "Website or application", "Other project"],
       },
@@ -482,9 +506,8 @@ export const content: Record<Locale, Content> = {
       location: "Brazil",
       availability: "Available for remote and international opportunities",
       columns: [
-        { title: "Navigation", links: [{ label: "Work", href: "/work" }, { label: "Expertise", href: "/expertise" }, { label: "About", href: "/about" }, { label: "Contact", href: "/contact" }] },
-        { title: "Expertise", links: [{ label: "Instructional Design", href: "/instructional-design" }, { label: "Visual Design", href: "/visual-design" }, { label: "Digital Products", href: "/digital-products" }] },
-        { title: "Connections", links: [{ label: "LinkedIn", href: "https://www.linkedin.com/" }, { label: "GitHub", href: "https://github.com/" }, { label: "Email", href: "mailto:hello@example.com" }] },
+        { title: "Navigation", links: [{ label: "Work", href: "/work" }, { label: "About", href: "/about" }, { label: "Contact", href: "/#contact" }] },
+        { title: "Connections", links: [{ label: "LinkedIn", href: "https://www.linkedin.com/in/jonatha-l-teixeira-jlt/" }, { label: "WhatsApp", href: "https://wa.me/5535984529241" }, { label: "Email", href: "mailto:jonatha.teixeira.business@gmail.com" }] },
       ],
     },
     expertise: englishExpertise,
@@ -500,9 +523,8 @@ export const content: Record<Locale, Content> = {
     },
     nav: [
       { label: "Projetos", href: "/pt-br/work" },
-      { label: "Especialidades", href: "/pt-br/expertise" },
       { label: "Sobre", href: "/pt-br/about" },
-      { label: "Contato", href: "/pt-br/contact" },
+      { label: "Contato", href: "/pt-br/#contact" },
     ],
     ui: {
       menu: "Menu",
@@ -510,7 +532,7 @@ export const content: Record<Locale, Content> = {
       language: "Idioma",
       letsTalk: "Vamos conversar",
       viewProjects: "Ver projetos",
-      viewExperience: "Conhecer minha experiência",
+      viewExperience: "Saber mais sobre mim",
       allProjects: "Ver todos os projetos",
       all: "Todos",
       caseStudy: "Case",
@@ -566,15 +588,16 @@ export const content: Record<Locale, Content> = {
         title: "Experiência em projetos de design, aprendizagem e tecnologia.",
         text: "Minha trajetória inclui criação visual, desenvolvimento de conteúdos digitais, projetos corporativos e construção de soluções para diferentes públicos e contextos.",
         items: [
-          { company: "TCS Brasil", role: "Business Analyst / Learning Content and Digital Solutions", period: "2024 — atual" },
-          { company: "Plural Web", role: "Visual Designer and E-learning Designer", period: "2021 — 2023" },
+          { company: "Tata Consultancy Services", role: "Designer Instrucional e Designer Gráfico", period: "01/2024 — atual" },
+          { company: "Plural Desenvolvimento de Web", role: "Designer Gráfico e Designer Instrucional", period: "03/2021 — 12/2023" },
+          { company: "Nova Concursos", role: "Designer Gráfico e Assistente de Marketing", period: "02/2018 — 03/2020" },
         ],
         cta: "Ver experiência completa",
       },
       contact: {
         title: "Tem uma oportunidade, um projeto ou um problema que precisa ser melhor resolvido?",
         text: "Estou disponível para conversar sobre oportunidades em design instrucional, design visual, produtos digitais e projetos que combinem design, tecnologia e inteligência artificial.",
-        primary: "Entrar em contato",
+        primary: "Enviar mensagem",
         secondary: "Ver LinkedIn",
       },
     },
@@ -606,14 +629,37 @@ export const content: Record<Locale, Content> = {
           { title: "IA acelera, mas não substitui decisão", text: "Utilizo inteligência artificial para explorar, construir e automatizar, mantendo responsabilidade sobre as escolhas e o resultado." },
           { title: "Versatilidade com direção", text: "Atuar em diferentes áreas não significa tratar tudo da mesma forma. Cada projeto exige profundidade, contexto e critérios próprios." },
         ],
-        languages: ["Português: nativo", "Inglês: B2 / Upper-intermediate", "Francês: em desenvolvimento"],
+        experience: [
+          {
+            company: "Tata Consultancy Services",
+            role: "Designer Instrucional e Designer Gráfico",
+            period: "01/2024 — atual",
+            text: "Criação de materiais visuais para treinamentos corporativos, incluindo apresentações, infográficos, ícones, diagramas, elementos de UI e assets para experiências de aprendizagem em SAP S/4HANA. Colaboração com instructional designers, SMEs, business analysts e stakeholders, usando IA para apoiar ideação, estruturação de conteúdo e eficiência do fluxo criativo.",
+            tools: ["Adobe Illustrator", "Photoshop", "Premiere", "Figma", "PowerPoint", "Microsoft Office", "Microsoft Teams", "ChatGPT", "Claude", "Gemini"],
+          },
+          {
+            company: "Plural Desenvolvimento de Web Ltda",
+            role: "Designer Gráfico e Designer Instrucional",
+            period: "03/2021 — 12/2023",
+            text: "Desenvolvimento de identidades visuais, layouts, templates, PDFs, ícones, infográficos e assets multimídia para projetos de e-learning e treinamentos corporativos. Criação de elementos reutilizáveis e interfaces para cursos em Storyline e Rise, com foco em clareza, hierarquia, acessibilidade e consistência de marca.",
+            tools: ["Figma", "Adobe Illustrator", "Photoshop", "InDesign", "After Effects", "Articulate Storyline", "Articulate Rise", "PowerPoint"],
+          },
+          {
+            company: "Nova Concursos",
+            role: "Designer Gráfico e Assistente de Marketing",
+            period: "02/2018 — 03/2020",
+            text: "Criação de peças para campanhas digitais, marketplaces, e-commerce, redes sociais, YouTube, e-mail marketing, banners, produtos visuais e landing pages em um ambiente de educação online com alto volume de produção.",
+            tools: ["Adobe Illustrator", "Photoshop", "After Effects", "Premiere", "YouTube Studio", "Instagram Analytics"],
+          },
+        ],
+        languages: ["Português: nativo", "Inglês: B2 / Upper-intermediate", "Espanhol: B2"],
         cta: "Ver meus projetos",
       },
       contact: {
         eyebrow: "Contato",
         title: "Vamos conversar sobre uma oportunidade, um projeto ou uma ideia.",
         text: "Estou disponível para oportunidades remotas e internacionais, projetos de design instrucional, design visual, produtos digitais e trabalhos que combinem design, tecnologia e inteligência artificial.",
-        channels: ["E-mail", "LinkedIn", "GitHub"],
+        channels: ["WhatsApp: +55 35 98452-9241", "E-mail: jonatha.teixeira.business@gmail.com", "LinkedIn: linkedin.com/in/jonatha-l-teixeira-jlt"],
         fields: ["Nome", "E-mail", "Empresa", "Assunto", "Mensagem"],
         subjects: ["Oportunidade profissional", "Instructional Design", "Visual Design", "Website ou aplicação", "Outro projeto"],
       },
@@ -626,9 +672,8 @@ export const content: Record<Locale, Content> = {
       location: "Brasil",
       availability: "Disponível para oportunidades remotas e internacionais",
       columns: [
-        { title: "Navegação", links: [{ label: "Projetos", href: "/pt-br/work" }, { label: "Especialidades", href: "/pt-br/expertise" }, { label: "Sobre", href: "/pt-br/about" }, { label: "Contato", href: "/pt-br/contact" }] },
-        { title: "Especialidades", links: [{ label: "Instructional Design", href: "/pt-br/instructional-design" }, { label: "Visual Design", href: "/pt-br/visual-design" }, { label: "Digital Products", href: "/pt-br/digital-products" }] },
-        { title: "Conexões", links: [{ label: "LinkedIn", href: "https://www.linkedin.com/" }, { label: "GitHub", href: "https://github.com/" }, { label: "E-mail", href: "mailto:hello@example.com" }] },
+        { title: "Navegação", links: [{ label: "Projetos", href: "/pt-br/work" }, { label: "Sobre", href: "/pt-br/about" }, { label: "Contato", href: "/pt-br/#contact" }] },
+        { title: "Conexões", links: [{ label: "LinkedIn", href: "https://www.linkedin.com/in/jonatha-l-teixeira-jlt/" }, { label: "WhatsApp", href: "https://wa.me/5535984529241" }, { label: "E-mail", href: "mailto:jonatha.teixeira.business@gmail.com" }] },
       ],
     },
     expertise: portugueseExpertise,

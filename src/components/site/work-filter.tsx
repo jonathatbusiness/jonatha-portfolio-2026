@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { areaColors, localizedPath, type AreaId, type Locale, type Project } from "@/lib/content";
-import { AreaMark, ProjectVisual } from "./ui";
+import { AreaMark, ProjectPreview } from "./ui";
 
 export function WorkFilter({
   locale,
@@ -42,13 +42,13 @@ export function WorkFilter({
       <div className="mt-10 grid gap-6 md:grid-cols-3">
         {filteredProjects.map((project) => (
           <Link className="group overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-paper)] transition-all duration-300 hover:-translate-y-1 hover:border-[var(--color-accent)]" href={localizedPath(locale, `/work/${project.slug}`)} key={project.slug}>
-            <ProjectVisual area={project.area} />
+            <ProjectPreview project={project} />
             <div className="p-6">
               <div className="flex items-center gap-2 text-sm font-semibold" style={{ color: areaColors[project.area] }}>
                 <AreaMark area={project.area} />
                 {labels.areas[project.area]}
               </div>
-              <h3 className="mt-4 text-2xl font-semibold text-[var(--color-graphite)]">{project.title}</h3>
+              <h3 className="mt-4 text-xl font-semibold leading-tight text-[var(--color-graphite)]">{project.title}</h3>
               <p className="mt-2 text-sm font-semibold text-[var(--color-muted)]">{Array.isArray(project.role) ? project.role.slice(0, 2).join(" · ") : project.role}</p>
               <p className="mt-4 leading-7 text-[var(--color-muted)]">{project.cardSummary ?? project.summary}</p>
               <ul className="mt-5 flex flex-wrap gap-2">
