@@ -1,0 +1,35 @@
+# Local development
+.next
+node_modules
+.vercel
+
+# Local environment files
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor files
+.vscode
+.idea
+*.swp
+*.swo
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Codex and local tooling
+.codex
+.codex-log
+
+# Tests and reports
+coverage
+playwright-report
+test-results
