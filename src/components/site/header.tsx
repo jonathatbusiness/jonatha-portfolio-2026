@@ -3,6 +3,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { FiMail } from "react-icons/fi";
+import { FaLinkedinIn, FaWhatsapp } from "react-icons/fa6";
 import { getContent, localizedPath, type Locale } from "@/lib/content";
 import { Container } from "./ui";
 
@@ -100,17 +102,40 @@ export function Header({ locale, path }: Readonly<{ locale: Locale; path: string
                   </Link>
                 ))}
               </nav>
-              <div className="relative mt-12 flex flex-wrap gap-4 text-sm font-semibold uppercase tracking-[0.16em] text-[var(--color-graphite)]">
+              <div className="relative mt-12 flex flex-col items-start gap-8">
+                <div className="grid gap-4 text-sm font-semibold uppercase tracking-[0.16em] text-[var(--color-graphite)]">
+                  <MobileContactLink href="https://wa.me/5535984529241" icon={<FaWhatsapp />} label="WhatsApp" onNavigate={closeMenu} />
+                  <MobileContactLink href="mailto:jonatha.teixeira.business@gmail.com" icon={<FiMail />} label={locale === "en" ? "Email" : "E-mail"} onNavigate={closeMenu} />
+                  <MobileContactLink href="https://www.linkedin.com/in/jonatha-l-teixeira-jlt/" icon={<FaLinkedinIn />} label="LinkedIn" onNavigate={closeMenu} />
+                </div>
                 <LanguageSwitcher locale={locale} path={path} onNavigate={closeMenu} variant="drawer" />
-                <a href="https://www.linkedin.com/in/jonatha-l-teixeira-jlt/">LinkedIn</a>
-                <a href="https://wa.me/5535984529241">WhatsApp</a>
-                <a href="mailto:jonatha.teixeira.business@gmail.com">Email</a>
               </div>
             </div>
           </aside>
         </div>
       ) : null}
     </header>
+  );
+}
+
+function MobileContactLink({
+  href,
+  icon,
+  label,
+  onNavigate,
+}: Readonly<{
+  href: string;
+  icon: React.ReactNode;
+  label: string;
+  onNavigate: () => void;
+}>) {
+  return (
+    <a className="inline-flex items-center gap-3 transition-colors hover:text-[var(--color-accent)]" href={href} onClick={onNavigate}>
+      <span className="text-lg text-[var(--color-navy)]" aria-hidden="true">
+        {icon}
+      </span>
+      {label}
+    </a>
   );
 }
 

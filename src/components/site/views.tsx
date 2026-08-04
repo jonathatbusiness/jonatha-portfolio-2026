@@ -210,10 +210,10 @@ export function HomeView({ locale }: Readonly<{ locale: Locale }>) {
 
       <Section className="scroll-mt-24" id="contact">
         <Container>
-          <div className="rounded-3xl bg-[var(--color-graphite)] p-8 text-[var(--color-paper)] sm:p-12 lg:p-16">
+          <div className="rounded-3xl bg-[var(--color-graphite)] p-5 text-[var(--color-paper)] sm:p-12 lg:p-16">
             <h2 className="max-w-4xl text-4xl font-semibold leading-tight sm:text-5xl">{content.home.contact.title}</h2>
             <p className="mt-6 max-w-3xl text-lg leading-8 text-white/75">{content.home.contact.text}</p>
-            <div className="mt-10 grid gap-3 lg:grid-cols-3">
+            <div className="mt-10 grid min-w-0 gap-3 lg:grid-cols-3">
               <ContactLink icon={<FaWhatsapp />} label="WhatsApp" value="+55 35 98452-9241" href="https://wa.me/5535984529241" />
               <ContactLink icon={<FiMail />} label={locale === "en" ? "Email" : "E-mail"} value="jonatha.teixeira.business@gmail.com" href="mailto:jonatha.teixeira.business@gmail.com" />
               <ContactLink icon={<FaLinkedinIn />} label="LinkedIn" value="jonatha-l-teixeira-jlt" href="https://www.linkedin.com/in/jonatha-l-teixeira-jlt/" />
@@ -515,7 +515,7 @@ function PageHero({
         <div className={imageSrc ? "grid items-center gap-12 lg:grid-cols-[1fr_360px]" : ""}>
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[var(--color-accent)]">{page.eyebrow}</p>
-            <h1 className={`${compact ? "mt-5 max-w-4xl text-4xl sm:text-5xl lg:text-6xl" : "mt-5 max-w-5xl text-5xl sm:text-6xl lg:text-7xl"} font-semibold leading-tight text-[var(--color-graphite)]`}>{page.title}</h1>
+            <h1 className={`${compact ? "mt-5 max-w-4xl text-[2.15rem] sm:text-5xl lg:text-6xl" : "mt-5 max-w-5xl text-[2.65rem] sm:text-6xl lg:text-7xl"} font-semibold leading-tight text-[var(--color-graphite)]`}>{page.title}</h1>
             {page.text ? <p className="mt-6 max-w-3xl text-xl leading-9 text-[var(--color-muted)]">{page.text}</p> : null}
             <div className="mt-10">
               <ButtonLink href={localizedPath(locale, "/#contact")} variant="secondary">
@@ -659,7 +659,7 @@ function ContactLink({
 }>) {
   return (
     <a
-      className={`group rounded-2xl border p-5 transition-all duration-300 hover:-translate-y-1 ${
+      className={`group min-w-0 max-w-full rounded-2xl border p-5 transition-all duration-300 hover:-translate-y-1 ${
         dark ? "border-white/15 bg-white/5 text-[var(--color-paper)] hover:border-[var(--color-accent)]" : "border-[var(--color-border)] bg-[var(--color-warm-white)] text-[var(--color-graphite)] hover:border-[var(--color-accent)]"
       }`}
       href={href}
@@ -668,7 +668,7 @@ function ContactLink({
     >
       <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--color-accent)] text-xl text-[var(--color-paper)]">{icon}</span>
       <span className={`mt-4 block text-sm font-semibold uppercase tracking-[0.14em] ${dark ? "text-white/60" : "text-[var(--color-muted)]"}`}>{label}</span>
-      <span className="mt-2 block break-words font-semibold">{value}</span>
+      <span className="mt-2 block min-w-0 font-semibold [overflow-wrap:anywhere]">{value}</span>
     </a>
   );
 }

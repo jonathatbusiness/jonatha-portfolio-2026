@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { getContent, localizedPath, type Locale } from "@/lib/content";
-import { ButtonLink, Container } from "./ui";
+import { getContent, type Locale } from "@/lib/content";
+import { Container } from "./ui";
 
 export function Footer({ locale }: Readonly<{ locale: Locale }>) {
   const content = getContent(locale);
@@ -8,18 +8,7 @@ export function Footer({ locale }: Readonly<{ locale: Locale }>) {
   return (
     <footer className="bg-[var(--color-navy)] py-16 text-[var(--color-paper)] sm:py-20">
       <Container>
-        <div className="grid gap-10 border-b border-white/20 pb-12 lg:grid-cols-[1.2fr_0.8fr]">
-          <div>
-            <h2 className="max-w-3xl text-3xl font-semibold leading-tight sm:text-5xl">{content.footer.title}</h2>
-            <p className="mt-4 text-xl text-white/75">{content.footer.text}</p>
-          </div>
-          <div className="lg:justify-self-end lg:self-end">
-            <ButtonLink href={localizedPath(locale, "/contact")} variant="light">
-              {content.footer.button}
-            </ButtonLink>
-          </div>
-        </div>
-        <div className="grid gap-10 py-12 md:grid-cols-3">
+        <div className="grid gap-10 border-b border-white/20 pb-12 md:grid-cols-3">
           {content.footer.columns.map((column) => (
             <div key={column.title}>
               <h3 className="text-sm font-semibold uppercase tracking-[0.16em] text-[var(--color-accent)]">{column.title}</h3>
