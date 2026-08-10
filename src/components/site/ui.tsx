@@ -56,7 +56,7 @@ export function ButtonLink({
 }>) {
   const variants = {
     primary: "border-[var(--color-accent)] bg-[var(--color-accent)] text-[var(--color-paper)] hover:border-[var(--color-accent-hover)] hover:bg-[var(--color-accent-hover)]",
-    secondary: "border-[var(--color-accent)] bg-[var(--color-accent)] text-[var(--color-paper)] hover:border-[var(--color-accent-hover)] hover:bg-[var(--color-accent-hover)]",
+    secondary: "border-[var(--color-navy)] bg-[var(--color-paper)] text-[var(--color-navy)]",
     light: "border-[var(--color-paper)] text-[var(--color-paper)] hover:border-[var(--color-accent)] hover:bg-[var(--color-accent)]",
   };
 
