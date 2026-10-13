@@ -214,7 +214,7 @@ export function HomeView({ locale }: Readonly<{ locale: Locale }>) {
             <h2 className="max-w-4xl text-4xl font-semibold leading-tight sm:text-5xl">{content.home.contact.title}</h2>
             <p className="mt-6 max-w-3xl text-lg leading-8 text-white/75">{content.home.contact.text}</p>
             <div className="mt-10 grid min-w-0 gap-3 lg:grid-cols-3">
-              <ContactLink icon={<FaWhatsapp />} label="WhatsApp" value="+55 35 98452-9241" href="https://wa.me/5535984529241" />
+              <ContactLink icon={<FaWhatsapp />} label="WhatsApp" value="+55 35 99272-0543" href="https://wa.me/5535992720543" />
               <ContactLink icon={<FiMail />} label={locale === "en" ? "Email" : "E-mail"} value="jonatha.teixeira.business@gmail.com" href="mailto:jonatha.teixeira.business@gmail.com" />
               <ContactLink icon={<FaLinkedinIn />} label="LinkedIn" value="jonatha-l-teixeira-jlt" href="https://www.linkedin.com/in/jonatha-l-teixeira-jlt/" />
             </div>
@@ -412,7 +412,7 @@ export function ContactView({ locale }: Readonly<{ locale: Locale }>) {
       <PageHero locale={locale} page={page} />
       <Section>
         <Container className="grid gap-4 md:grid-cols-3">
-          <ContactLink icon={<FaWhatsapp />} label="WhatsApp" value="+55 35 98452-9241" href="https://wa.me/5535984529241" dark={false} />
+              <ContactLink icon={<FaWhatsapp />} label="WhatsApp" value="+55 35 99272-0543" href="https://wa.me/5535992720543" dark={false} />
           <ContactLink icon={<FiMail />} label={locale === "en" ? "Email" : "E-mail"} value="jonatha.teixeira.business@gmail.com" href="mailto:jonatha.teixeira.business@gmail.com" dark={false} />
           <ContactLink icon={<FaLinkedinIn />} label="LinkedIn" value="jonatha-l-teixeira-jlt" href="https://www.linkedin.com/in/jonatha-l-teixeira-jlt/" dark={false} />
         </Container>

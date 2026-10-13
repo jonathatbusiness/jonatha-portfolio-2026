@@ -104,7 +104,7 @@ export function Header({ locale, path }: Readonly<{ locale: Locale; path: string
               </nav>
               <div className="relative mt-12 flex flex-col items-start gap-8">
                 <div className="grid gap-4 text-sm font-semibold uppercase tracking-[0.16em] text-[var(--color-graphite)]">
-                  <MobileContactLink href="https://wa.me/5535984529241" icon={<FaWhatsapp />} label="WhatsApp" onNavigate={closeMenu} />
+                  <MobileContactLink href="https://wa.me/5535992720543" icon={<FaWhatsapp />} label="WhatsApp" onNavigate={closeMenu} />
                   <MobileContactLink href="mailto:jonatha.teixeira.business@gmail.com" icon={<FiMail />} label={locale === "en" ? "Email" : "E-mail"} onNavigate={closeMenu} />
                   <MobileContactLink href="https://www.linkedin.com/in/jonatha-l-teixeira-jlt/" icon={<FaLinkedinIn />} label="LinkedIn" onNavigate={closeMenu} />
                 </div>
