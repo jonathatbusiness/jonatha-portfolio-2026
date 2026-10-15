@@ -6,6 +6,7 @@ import { areaColors, getContent, getExpertise, getProject, localizedPath, type A
 import { Footer } from "./footer";
 import { Header } from "./header";
 import { MediaGallery } from "./media-gallery";
+import { AiAtWorkEvidence } from "./ai-at-work-evidence";
 import { WorkFilter } from "./work-filter";
 import { AreaMark, ButtonLink, Container, ProjectPreview, ProjectVisual, Section, SectionHeading } from "./ui";
 
@@ -204,7 +205,7 @@ export function HomeView({ locale }: Readonly<{ locale: Locale }>) {
               {content.home.featured.cta}
             </ButtonLink>
           </div>
-          <ProjectGrid locale={locale} limit={3} />
+          <ProjectGrid locale={locale} limit={4} />
         </Container>
       </Section>
 
@@ -591,6 +592,7 @@ function MetaList({ title, items }: Readonly<{ title: string; items: string[] }>
 }
 
 function ProjectMediaBlock({ project, locale }: Readonly<{ project: NonNullable<ReturnType<typeof getProject>>; locale: Locale }>) {
+  if (project.slug === "ai-at-work-think-before-you-prompt") return <AiAtWorkEvidence locale={locale} />;
   const primary = project.media?.[0];
   const imageMedia = project.media?.filter((item): item is typeof item & { src: string } => Boolean(item.src)) ?? [];
 

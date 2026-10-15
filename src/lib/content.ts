@@ -33,7 +33,7 @@ type Expertise = {
   aiNote?: string;
 };
 
-export type ProjectMediaType = "image" | "video" | "carousel" | "external-demo" | "website" | "gallery";
+export type ProjectMediaType = "image" | "video" | "carousel" | "external-demo" | "website" | "gallery" | "case-evidence";
 
 export type ProjectMedia = {
   type: ProjectMediaType;

@@ -34,6 +34,33 @@ const mediaAltEn = {
 
 export const projectsPt: Project[] = [
   {
+    slug: "ai-at-work-think-before-you-prompt",
+    area: areas.instructional,
+    title: "AI at Work: Think Before You Prompt",
+    subtitle: "Uma experiência de microlearning corporativo sobre o uso responsável de ferramentas de inteligência artificial generativa no trabalho.",
+    summary: "Microlearning interativo que combina aprendizagem baseada em cenários, vídeo instrucional gerado com IA e orientações práticas para o ambiente profissional.",
+    cardSummary: "Microlearning interativo sobre riscos de compartilhar informações sensíveis com ferramentas de IA generativa.",
+    featured: true,
+    status: "completed",
+    role: ["Design instrucional", "Learning Experience Design", "Roteiro e storyboard", "Desenvolvimento interativo", "Produção audiovisual"],
+    services: ["Instructional Design", "Scenario-Based Learning", "Microlearning", "Produção de vídeo com IA", "QA de conteúdo"],
+    tools: ["DiscereNow Add-in", "DiscereNow Studio", "Microsoft Word", "Synthesia", "React-based Web Learning"],
+    tags: ["Design instrucional", "Learning technology", "Generative AI", "Microlearning"],
+    coverImage: "/projects/ai-at-work/cover.webp",
+    media: [{ type: "case-evidence", src: "/projects/ai-at-work/cover.webp", alt: "AI at Work: Think Before You Prompt" }],
+    links: [],
+    content: {
+      overview: ["O projeto aborda o uso de IA generativa no trabalho sem exposição indevida de informações confidenciais. É destinado a profissionais que utilizam essas ferramentas e foi estruturado como um microlearning em inglês, com aproximadamente 4–5 minutos.", "A estratégia percorre Context → Opportunity → Risk → Decision → Practical Application, combinando um cenário realista, tomada de decisão e feedback instrucional."],
+      challenge: ["A experiência precisava tornar um risco abstrato — compartilhar informação sensível com uma ferramenta de IA — concreto, reconhecível e aplicável à rotina profissional."],
+      role: ["Fui responsável pelo design instrucional e pelos objetivos de aprendizagem, estruturação do roteiro, roteiro audiovisual e storyboard, composição visual do vídeo no Synthesia, atividades interativas, construção no DiscereNow, revisão e controle de qualidade."],
+      approach: ["O conteúdo foi organizado em uma sequência curta baseada em cenário, oportunidade, risco, decisão e aplicação prática, com feedback imediatamente conectado à escolha do participante."],
+      solution: ["O resultado é uma experiência interativa com vídeo instrucional, knowledge checks e orientações práticas, publicada para Web e SCORM pelo DiscereNow Studio."],
+      outcome: ["O case demonstra competências em Instructional Design, LXD, Scenario-Based Learning, Generative AI, produção audiovisual assistida por IA e desenvolvimento de experiências educacionais interativas."],
+      note: ["O curso foi desenvolvido em inglês. Não são atribuídas ao Synthesia a autoria do curso ou a construção do DiscereNow."]
+    },
+    seo: { title: "AI at Work: Think Before You Prompt | Jonatha Teixeira", description: "An interactive corporate microlearning project combining instructional design, AI-generated video, scenario-based learning, and the custom-built DiscereNow authoring solution." }
+  },
+  {
     slug: "canteiro-de-ideias",
     area: areas.instructional,
     title: "Canteiro de Ideias",
@@ -476,6 +503,7 @@ function translateList(items: string | string[], translations: Record<string, st
 
 function translateSubtitle(slug: string, fallback: string) {
   const subtitles: Record<string, string> = {
+    "ai-at-work-think-before-you-prompt": "An interactive corporate microlearning experience about using generative AI responsibly at work.",
     "canteiro-de-ideias": "A learning experience built around the metaphor of ideas being planted, nurtured and transformed into results.",
     "evoluir-cotrijal": "Script, storytelling, visual direction and editing developed in one week for a high-impact presentation.",
     "jonjobs-h2": "A digital product that turns extensive and fragmented seasonal job lists into a clearer application workflow.",
@@ -492,6 +520,7 @@ function translateSubtitle(slug: string, fallback: string) {
 
 function translateSummary(slug: string, fallback: string) {
   const summaries: Record<string, string> = {
+    "ai-at-work-think-before-you-prompt": "Interactive microlearning about the risks of sharing sensitive information with generative AI tools.",
     "canteiro-de-ideias": "Interactive experience created to present an internal innovation program and encourage employees to develop and share ideas.",
     "evoluir-cotrijal": "Presentation video for Cotrijal's learning platform, created with a trailer-like language for a large event.",
     "jonjobs-h2": "Platform to find, filter and organize applications for H-2B seasonal jobs in the United States.",
@@ -542,6 +571,7 @@ function translateContent(slug: string): Project["content"] {
 
 function translateRole(slug: string) {
   const roles: Record<string, string> = {
+    "ai-at-work-think-before-you-prompt": "I led the instructional design, learning objectives, scripts, storyboard, Synthesia video composition, interactive activities, DiscereNow build, review and quality assurance.",
     "jonjobs-h2": "I defined the product strategy, solution architecture, UX/UI, content and requirements, using AI tools such as ChatGPT and Codex to support implementation.",
     "jonjobs-canada": "I defined the product proposal, experience, filters, page architecture, visual direction, content organization and AI-assisted implementation.",
     discerenow: "I defined the product, Word-to-Studio workflow, content blocks, interface and AI-assisted implementation for an evolving learning technology tool.",
