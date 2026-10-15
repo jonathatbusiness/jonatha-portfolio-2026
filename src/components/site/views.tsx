@@ -746,101 +746,130 @@ export function ProjectView({
         }}
         compact
       />
-      <Section>
-        <Container
-          className={
-            project.media?.[0]?.type === "video"
-              ? "max-w-5xl"
-              : "grid gap-10 lg:grid-cols-[0.85fr_1.15fr]"
-          }
-        >
-          <div>
-            <ProjectMediaBlock project={project} locale={locale} />
-            {project.media?.[0]?.type !== "video" && project.links?.length ? (
-              <div className="mt-6 flex flex-wrap gap-3">
-                {project.links.map((link) => (
-                  <a
-                    className="inline-flex min-h-12 items-center justify-center rounded-xl border border-[var(--color-accent)] bg-[var(--color-accent)] px-5 text-sm font-semibold text-[var(--color-paper)] transition-colors hover:bg-[var(--color-accent-hover)]"
-                    href={link.href}
-                    key={link.href}
-                    target={link.external ? "_blank" : undefined}
-                    rel={link.external ? "noopener noreferrer" : undefined}
-                  >
-                    {link.label} ↗
-                  </a>
-                ))}
-              </div>
-            ) : null}
-          </div>
-          <div
+      {project.slug !== "ai-at-work-think-before-you-prompt" ? (
+        <Section>
+          <Container
             className={
               project.media?.[0]?.type === "video"
-                ? "mt-10 grid gap-8 md:grid-cols-3"
-                : "space-y-8"
+                ? "max-w-5xl"
+                : "grid gap-10 lg:grid-cols-[0.85fr_1.15fr]"
             }
           >
-            <MetaList
-              title={locale === "en" ? "Role" : "Papel"}
-              items={
-                Array.isArray(project.role) ? project.role : [project.role]
+            <div>
+              <ProjectMediaBlock project={project} locale={locale} />
+              {project.media?.[0]?.type !== "video" && project.links?.length ? (
+                <div className="mt-6 flex flex-wrap gap-3">
+                  {project.links.map((link) => (
+                    <a
+                      className="inline-flex min-h-12 items-center justify-center rounded-xl border border-[var(--color-accent)] bg-[var(--color-accent)] px-5 text-sm font-semibold text-[var(--color-paper)] transition-colors hover:bg-[var(--color-accent-hover)]"
+                      href={link.href}
+                      key={link.href}
+                      target={link.external ? "_blank" : undefined}
+                      rel={link.external ? "noopener noreferrer" : undefined}
+                    >
+                      {link.label} ↗
+                    </a>
+                  ))}
+                </div>
+              ) : null}
+            </div>
+            <div
+              className={
+                project.media?.[0]?.type === "video"
+                  ? "mt-10 grid gap-8 md:grid-cols-3"
+                  : "space-y-8"
               }
-            />
-            <MetaList
-              title={locale === "en" ? "Services" : "Serviços"}
-              items={project.services ?? []}
-            />
-            <MetaList
-              title={locale === "en" ? "Tools" : "Ferramentas"}
-              items={project.tools ?? []}
-            />
-          </div>
-        </Container>
-      </Section>
+            >
+              <MetaList
+                title={locale === "en" ? "Role" : "Papel"}
+                items={
+                  Array.isArray(project.role) ? project.role : [project.role]
+                }
+              />
+              <MetaList
+                title={locale === "en" ? "Services" : "Serviços"}
+                items={project.services ?? []}
+              />
+              <MetaList
+                title={locale === "en" ? "Tools" : "Ferramentas"}
+                items={project.tools ?? []}
+              />
+            </div>
+          </Container>
+        </Section>
+      ) : null}
       <Section className="bg-[var(--color-linen)]">
         <Container className="grid gap-10 lg:grid-cols-[0.72fr_1.28fr]">
           <SectionHeading
             eyebrow={project.client ?? project.status}
-            title={project.summary}
+            title={
+              project.slug === "ai-at-work-think-before-you-prompt"
+                ? content.ui.interactiveMicrolearning
+                : project.summary
+            }
             className="case-summary-heading"
           />
-          <div className="space-y-10">
-            {project.content ? (
-              <>
-                <CaseBlock
-                  title={locale === "en" ? "Overview" : "Visão geral"}
-                  paragraphs={project.content.overview}
-                />
-                <CaseBlock
-                  title={locale === "en" ? "Challenge" : "Desafio"}
-                  paragraphs={project.content.challenge}
-                />
-                <CaseBlock
-                  title={locale === "en" ? "My role" : "Meu papel"}
-                  paragraphs={project.content.role}
-                />
-                <CaseBlock
-                  title={locale === "en" ? "Approach" : "Abordagem"}
-                  paragraphs={project.content.approach}
-                />
-                <CaseBlock
-                  title={locale === "en" ? "Solution" : "Solução"}
-                  paragraphs={project.content.solution}
-                />
-                <CaseBlock
-                  title={locale === "en" ? "Outcome" : "Resultado"}
-                  paragraphs={project.content.outcome}
-                />
-                {project.content.note ? (
+          {project.slug === "ai-at-work-think-before-you-prompt" ? (
+            <div className="min-w-0">
+              <h2 className="text-xl font-semibold leading-7 text-[var(--color-graphite)]">
+                {project.summary}
+              </h2>
+              {project.content ? (
+                <div className="mt-5 space-y-4 text-base leading-7 text-[var(--color-muted)]">
+                  {[
+                    ...project.content.overview,
+                    ...project.content.challenge,
+                    ...project.content.role,
+                    ...project.content.approach,
+                    ...project.content.solution,
+                    ...project.content.outcome,
+                  ].map((paragraph, index) => (
+                    <p key={`${index}-${paragraph.slice(0, 24)}`}>{paragraph}</p>
+                  ))}
+                </div>
+              ) : null}
+            </div>
+          ) : (
+            <div className="space-y-10">
+              {project.content ? (
+                <>
                   <CaseBlock
-                    title={locale === "en" ? "Note" : "Observação"}
-                    paragraphs={project.content.note}
+                    title={locale === "en" ? "Overview" : "Visão geral"}
+                    paragraphs={project.content.overview}
                   />
-                ) : null}
-              </>
-            ) : null}
-          </div>
+                  <CaseBlock
+                    title={locale === "en" ? "Challenge" : "Desafio"}
+                    paragraphs={project.content.challenge}
+                  />
+                  <CaseBlock
+                    title={locale === "en" ? "My role" : "Meu papel"}
+                    paragraphs={project.content.role}
+                  />
+                  <CaseBlock
+                    title={locale === "en" ? "Approach" : "Abordagem"}
+                    paragraphs={project.content.approach}
+                  />
+                  <CaseBlock
+                    title={locale === "en" ? "Solution" : "Solução"}
+                    paragraphs={project.content.solution}
+                  />
+                  <CaseBlock
+                    title={locale === "en" ? "Outcome" : "Resultado"}
+                    paragraphs={project.content.outcome}
+                  />
+                </>
+              ) : null}
+            </div>
+          )}
         </Container>
       </Section>
+      {project.slug === "ai-at-work-think-before-you-prompt" ? (
+        <Section>
+          <Container>
+            <ProjectMediaBlock project={project} locale={locale} />
+          </Container>
+        </Section>
+      ) : null}
       <Section>
         <Container>
           <div className="flex flex-col justify-between gap-3 border-y border-[var(--color-border)] py-5 md:flex-row">
@@ -985,11 +1014,11 @@ function CaseBlock({
   paragraphs,
 }: Readonly<{ title: string; paragraphs: string[] }>) {
   return (
-    <section className="border-t border-[var(--color-border)] pt-6">
-      <h2 className="text-2xl font-semibold text-[var(--color-graphite)]">
+    <section className="border-t border-[var(--color-border)] pt-4">
+      <h2 className="text-xl font-semibold text-[var(--color-graphite)]">
         {title}
       </h2>
-      <div className="mt-3 space-y-4 leading-7 text-[var(--color-muted)]">
+      <div className="mt-2 space-y-3 leading-7 text-[var(--color-muted)]">
         {paragraphs.map((paragraph) => (
           <p key={paragraph}>{paragraph}</p>
         ))}

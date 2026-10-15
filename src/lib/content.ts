@@ -107,6 +107,7 @@ type Content = {
     allProjects: string;
     all: string;
     caseStudy: string;
+    interactiveMicrolearning: string;
     relatedProjects: string;
     responseTime: string;
   };
@@ -370,6 +371,7 @@ export const content: Record<Locale, Content> = {
       allProjects: "View all projects",
       all: "All",
       caseStudy: "Case study",
+      interactiveMicrolearning: "Interactive Microlearning",
       relatedProjects: "Related projects",
       responseTime: "I usually reply within two business days.",
     },
@@ -536,6 +538,7 @@ export const content: Record<Locale, Content> = {
       allProjects: "Ver todos os projetos",
       all: "Todos",
       caseStudy: "Estudo de caso",
+      interactiveMicrolearning: "Microlearning Interativo",
       relatedProjects: "Projetos relacionados",
       responseTime: "Costumo responder em até dois dias úteis.",
     },
